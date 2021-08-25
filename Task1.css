@@ -1,0 +1,45 @@
+body{
+    background-image: url("https://videohive.img.customer.envatousercontent.com/files/66e3b4af-5506-4f05-b4c7-711af64766a9/inline_image_preview.jpg?auto=compress%2Cformat&fit=crop&crop=top&max-h=8000&max-w=590&s=9369ca0b4b03e5b2cb7681cfb1f32727");
+    background-size: cover;
+}
+@media screen and (max-width: 600px),screen and (max-height: 600px) {
+    body {
+    background-image: url("https://static4.depositphotos.com/1001351/322/v/600/depositphotos_3223514-stock-illustration-grunge-abstract-background-eps-10.jpg");
+    background-size: cover;
+    }
+    fieldset{
+        text-align: left;
+        justify-content:left;
+        margin-bottom: 10px;
+    }
+}
+fieldset{
+    text-align: center;
+    justify-content:center;
+    margin-bottom: 20px;
+}
+.legend{
+    font-weight: bolder;
+    color:rgb(255, 255, 255);
+    font-size: 50px;
+}
+.legend1{
+    font-weight: bolder;
+    color:rgb(255, 255, 255);
+    font-size: 30px;
+}
+.output{
+    font-weight: bolder;
+    color: rgb(255, 255, 255);
+    font-size: larger;
+}
+.button{
+    height:30px;
+    cursor: pointer;
+}
+.height{
+    height:30px;
+}
+table, th, td {
+    border:1px solid rgb(255, 255, 255);
+  }

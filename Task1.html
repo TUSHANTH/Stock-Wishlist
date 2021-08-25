@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <title>Stock Watchlist </title>
+        <link rel="stylesheet" href="Task1.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <Fieldset>
+            <legend class="legend">Stock Watchlist</legend>
+            <input class="height"type="text" id="stock" name="StockName" autocomplete="off" placeholder="Enter Stock Name"/>
+            <input class="height" type="number" id="stockvalue" name="StockValue" autocomplete="off" min='1' placeholder="Enter Stock Value"/>
+            <Button class="button" id="stockbtn" type="submit" >ENTER</Button>
+        </Fieldset>
+        <fieldset> 
+            <legend class="legend1">StockData</legend>
+            <table id="table" style="width:90%;color: white;margin-left: 40px;">
+                <thead>
+                    <th>Stock Name</th>
+                    <th>Price</th>
+                    <th>Delete</th>
+                    <th>Edit</th>
+                </thead>
+                <tbody style="text-align: center;">
+
+                </tbody> 
+                
+            </table>
+        </fieldset>
+        <script type="text/javascript">
+                window.oncontextmenu = function () {
+                return false;
+                }
+                const tbodyEl = document.querySelector("tbody");
+                const skey=document.getElementById("stock")
+                const svalue=document.getElementById("stockvalue")
+                const sbtn=document.getElementById("stockbtn")
+                const sdiv=document.getElementById("stockoutput")
+                for (let i=0; i<localStorage.length;i++){
+                        const key=localStorage.key(i);
+                        const value=localStorage.getItem(key);
+
+                        tbodyEl.innerHTML += `<tr>
+                                <td>${key}</td>
+                                <td contentEditable="false">${value}</td>
+                                <td><button id="deleteBtn" onclick='removeRow(this)'><i class="fa fa-trash"></i></button></td>
+                                <td><button id="updateBtn" onclick='updateRow(this)'><i class="fa fa-edit"></i></button></td>
+                                </tr>`; 
+                    }  
+                function updateRow(Button) { 
+                    var tablerow = document.getElementById('table');
+                    selectedRow = Button.parentElement.parentElement;
+                    var key = selectedRow.cells[0].innerHTML;
+                    selectedRow.cells[1].innerHTML="<input class='height' type='number' id='stockvalueup' name='StockValue' autocomplete='off' min='1' placeholder='Enter Stock Value'/>"
+                    selectedRow.cells[3].innerHTML="<button id='updatesubBtn'><i class='fa fa-thumbs-up'></i></button>";
+                    updatesubBtn.onclick = function(){
+                        var x=document.getElementById('stockvalueup').value
+                        if(Boolean(x)){
+                            selectedRow.cells[1].innerHTML= x
+                            var value = selectedRow.cells[1].innerHTML
+                            localStorage.setItem(key,value);
+                            selectedRow.cells[3].innerHTML="<button id='updateBtn'onclick='updateRow(this)'><i class='fa fa-edit'></button>";
+                        }
+                        else{
+                            updateRow(Button)
+                        }
+                    }
+                    
+
+                }
+                function removeRow(Button) { 
+                    var tablerow = document.getElementById('table');
+                    const key=localStorage.key(tablerow.parentNode.value);
+                    tablerow.deleteRow(Button.parentNode.parentNode.rowIndex);
+                    localStorage.removeItem(key)
+                }
+
+                stockbtn.onclick = function(){
+                    const key = skey.value;
+                    const value = svalue.value
+                    if (key && value){
+                        if (key in localStorage) {
+                            alert('Data Already exists');
+                            location.reload()
+                        } 
+                        else {
+                            localStorage.setItem(key,value);
+                        }
+                    }
+                    location.reload() 
+                }
+
+        </script>
+    </body>
+</html>
